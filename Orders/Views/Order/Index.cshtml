@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Orders.Models.Domains.Order>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a href="@Url.Action("Create", "Order")" class="btn btn-primary">Add New Order</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Total Value</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Date.ToString("dd/MM/yyyy")</td>
+                <td>@order.Product.Name</td>
+                <td>@order.Quantity</td>
+                <td>
+                    @if (order.IsCompleted)
+                    {
+                        <span class="badge bg-success">Completed</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning">Pending</span>
+                    }
+                </td>
+                <td>@order.TotalValue.ToString("C")</td>
+                <td>
+                    @if (!order.IsCompleted)
+                    {
+                        <form asp-action="MarkAsCompleted" method="post" style="display:inline;">
+                            <input type="hidden" name="orderId" value="@order.Id" />
+                            <button type="submit" class="btn btn-success btn-sm">Mark as Completed</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

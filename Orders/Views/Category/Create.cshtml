@@ -1,0 +1,14 @@
+﻿@model Orders.Models.ViewModels.CategoryViewModel
+
+<h2>Create New Category</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<a href="@Url.Action("Index", "Category")" class="btn btn-secondary">Back to Categories</a>

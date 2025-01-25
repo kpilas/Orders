@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Orders.Models.Domains.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a href="@Url.Action("Create", "Product")" class="btn btn-primary mb-3">Create New Product</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Category.Name</td>
+                <td>@product.Price</td>
+                <td>
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@product.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

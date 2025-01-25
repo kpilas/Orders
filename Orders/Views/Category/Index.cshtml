@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Orders.Models.ViewModels.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Category List";
+}
+
+
+<h2>Categories</h2>
+
+<a href="@Url.Action("Create", "Category")" class="btn btn-primary">Add New Category</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>
+                    <a href="@Url.Action("Delete", "Category", new { id = category.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
