@@ -12,22 +12,22 @@ namespace Orders.Models.Domains
 
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Name is required.")]
-        [Display(Name = "Name")]
+        [Required]
+        [Display(Name = "Nazwa")]
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Description is required.")]
-        [Display(Name = "Description")]
+        [Required]
+        [Display(Name = "Opis")]
         [MaxLength(250)]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Category is required.")]
-        [Display(Name = "Category")]
+        [Required]
+        [Display(Name = "Kategoria")]
         public int CategoryId { get; set; }
 
-        [Required(ErrorMessage = "Price is required.")]
-        [Display(Name = "Price")]
+        [Required]
+        [Display(Name = "Cena")]
         public decimal Price { get; set; }
 
 

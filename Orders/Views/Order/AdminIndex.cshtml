@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<Orders.Models.Domains.Order>
+@{
+    ViewData["Title"] = "Wszystkie zamówienia";
+}
 
-<h2>All Orders</h2>
+<h2>@ViewData["Title"]</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Order ID</th>
-            <th>Customer Email</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Total Value</th>
-            <th>Date</th>
+            <th>ID zamówienia</th>
+            <th>Klient</th>
+            <th>Produkt</th>
+            <th>Ilość</th>
+            <th>Suma</th>
+            <th>Data</th>
             <th>Status</th>
             <th></th>
         </tr>
@@ -28,11 +31,11 @@
                 <td>
                     @if (order.IsCompleted)
                     {
-                        <span class="badge bg-success">Completed</span>
+                        <span class="badge bg-success">Zakończone</span>
                     }
                     else
                     {
-                        <span class="badge bg-warning">Pending</span>
+                        <span class="badge bg-warning">W trakcie</span>
                     }
                 </td>
                 <td>
@@ -40,7 +43,7 @@
                     {
                         <form asp-action="MarkAsCompleted" method="post" style="display:inline;">
                             <input type="hidden" name="orderId" value="@order.Id" />
-                            <button type="submit" class="btn btn-success btn-sm">Mark as Completed</button>
+                            <button type="submit" class="btn btn-success btn-sm">Oznacz jako zakończone</button>
                         </form>
                     }
                 </td>

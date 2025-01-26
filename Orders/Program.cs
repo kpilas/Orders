@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Orders.Data;
 using Orders.Models.Domains;
 using Orders;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +14,22 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { "pl-PL", "en-US" }; // Polskie i angielskie wsparcie
+    options.DefaultRequestCulture = new RequestCulture("pl-PL"); // Domyœlnie polski
+    options.SupportedCultures = supportedCultures.Select(c => new CultureInfo(c)).ToArray();
+    options.SupportedUICultures = supportedCultures.Select(c => new CultureInfo(c)).ToArray();
+});
+
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -24,6 +38,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 var app = builder.Build();
+
+app.UseRequestLocalization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

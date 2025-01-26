@@ -1,20 +1,20 @@
 ﻿@model IEnumerable<Orders.Models.Domains.Product>
 
 @{
-    ViewData["Title"] = "Product List";
+    ViewData["Title"] = "Lista produktów";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<a href="@Url.Action("Create", "Product")" class="btn btn-primary mb-3">Create New Product</a>
+<a href="@Url.Action("Create", "Product")" class="btn btn-primary mb-3">Dodaj nowy produkt</a>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Price</th>
+            <th>Nazwa produktu</th>
+            <th>Opis</th>
+            <th>Kategoria</th>
+            <th>Cena</th>
             <th></th>
         </tr>
     </thead>
@@ -27,10 +27,10 @@
                 <td>@product.Category.Name</td>
                 <td>@product.Price</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Product", new { id = product.Id })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Edit", "Product", new { id = product.Id })" class="btn btn-primary">Edytuj</a>
                     <form action="@Url.Action("Delete", "Product", new { id = product.Id })" method="post" style="display:inline;">
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Usuń</button>
                     </form>
                 </td>
             </tr>

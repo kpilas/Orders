@@ -1,10 +1,10 @@
 ﻿@model Orders.Models.ViewModels.CategoryViewModel
 
 @{
-    ViewData["Title"] = "Edycja";
+    ViewData["Title"] = "Edycja kategorii";
 }
 
-<h2>Edit Category</h2>
+<h2>@ViewData["Title"]</h2>
 
 <form asp-action="Edit">
     <div class="form-group">
@@ -13,10 +13,10 @@
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="mt-2 btn btn-primary">Zapisz</button>
 </form>
 
-<a href="@Url.Action("Index", "Category")">Back to list</a>
+<a href="@Url.Action("Index", "Category")" class="mt-2 btn btn-secondary">Powrót do kategorii</a>
 
 @section Scripts {
     @{

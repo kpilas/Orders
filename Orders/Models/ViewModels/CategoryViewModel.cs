@@ -6,8 +6,8 @@ namespace Orders.Models.ViewModels
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Category name is required.")]
-        [Display(Name = "Category Name")]
+        [Required(ErrorMessage = "Nazwa kategorii jest wymagana.")]
+        [Display(Name = "Nazwa")]
         public string Name { get; set; }
     }
 }

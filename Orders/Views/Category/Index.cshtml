@@ -1,18 +1,17 @@
 ﻿@model IEnumerable<Orders.Models.ViewModels.CategoryViewModel>
 
 @{
-    ViewData["Title"] = "Category List";
+    ViewData["Title"] = "Lista kategorii";
 }
 
+<h2>@ViewData["Title"]</h2>
 
-<h2>Categories</h2>
-
-<a href="@Url.Action("Create", "Category")" class="btn btn-primary">Add New Category</a>
+<a href="@Url.Action("Create", "Category")" class="btn btn-primary">Dodaj nową kategorię</a>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Category Name</th>
+            <th>Nazwa kategorii</th>
             <th></th>
         </tr>
     </thead>
@@ -22,10 +21,10 @@
             <tr>
                 <td>@category.Name</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Category", new { id = category.Id })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Edit", "Category", new { id = category.Id })" class="btn btn-primary">Edytuj</a>
                     <form action="@Url.Action("Delete", "Category", new { id = category.Id })" method="post" style="display:inline;">
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Usuń</button>
                     </form>
                 </td>
             </tr>

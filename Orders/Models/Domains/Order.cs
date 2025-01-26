@@ -6,25 +6,25 @@ namespace Orders.Models.Domains
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Client is required.")]
-        [Display(Name = "Client")]
+        [Required]
+        [Display(Name = "Klient")]
         public string CustomerId { get; set; }
 
-        [Required(ErrorMessage = "Date is required.")]
+        [Required]
         public DateTime Date { get; set; }
 
-        [Required(ErrorMessage = "Product is required.")]
-        [Display(Name = "Product")]
+        [Required]
+        [Display(Name = "Produkt")]
         public int ProductId { get; set; }
 
-        [Required(ErrorMessage = "Quantity is required.")]
-        [Display(Name = "Quantity")]
+        [Required]
+        [Display(Name = "Ilość")]
         public int Quantity { get; set; }
 
-        [Display(Name = "Completed")]
+        [Display(Name = "Zrealizowane")]
         public bool IsCompleted { get; set; }
 
-        [Display(Name = "Total value")]
+        [Display(Name = "Suma")]
         public decimal TotalValue { get; set; }
 
 

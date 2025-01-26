@@ -1,10 +1,10 @@
 ﻿@model Orders.Models.ViewModels.ProductViewModel
 
 @{
-    ViewData["Title"] = "Edycja";
+    ViewData["Title"] = "Edycja produktu";
 }
 
-<h2>Edit Product</h2>
+<h2>@ViewData["Title"]</h2>
 
 <form asp-action="Edit" method="post">
     <div class="form-group">
@@ -29,10 +29,10 @@
         <input asp-for="Price" class="form-control" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="mt-2 btn btn-primary">Zapisz</button>
 </form>
 
-<a href="@Url.Action("Index", "Product")">Back to list</a>
+<a href="@Url.Action("Index", "Product")" class="mt-2 btn btn-secondary">Powrót do produktów</a>
 
 @section Scripts {
     @{

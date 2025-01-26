@@ -6,12 +6,12 @@ namespace Orders.Models.Domains
 {
     public class OrderCreateViewModel
     {
-        [Required]
-        [Display(Name = "Product")]
+        [Required(ErrorMessage = "Pole Produkt jest wymagane.")]
+        [Display(Name = "Produkt")]
         public int ProductId { get; set; }
 
-        [Required]
-        [Display(Name = "Quantity")]
+        [Required(ErrorMessage = "Pole Ilość jest wymagane.")]
+        [Display(Name = "Ilość")]
         public int Quantity { get; set; }
 
         public List<SelectListItem> Products { get; set; } = new List<SelectListItem>();
