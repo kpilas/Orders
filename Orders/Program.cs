@@ -5,6 +5,7 @@ using Orders.Models.Domains;
 using Orders;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,4 +90,16 @@ async Task SeedDataAsync(IServiceProvider services)
             await roleManager.CreateAsync(new IdentityRole(role));
         }
     }
+
+    //// nadawanie roli admin
+    //var user = await userManager.FindByEmailAsync("user@example.com");
+    //if (user != null)
+    //{
+    //    var roleExists = await roleManager.RoleExistsAsync("Admin");
+    //    if (roleExists)
+    //    {
+    //        await userManager.AddToRoleAsync(user, "Admin");
+    //    }
+    //}
 }
+
