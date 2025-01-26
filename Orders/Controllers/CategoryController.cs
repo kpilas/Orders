@@ -3,6 +3,7 @@ using Orders.Models.Domains;
 using Orders.Models.ViewModels;
 using Orders.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Orders.Controllers
 {
@@ -54,9 +55,11 @@ namespace Orders.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var category = _context.Categories.Find(id);
+            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
             if (category != null)
             {
                 _context.Categories.Remove(category);
@@ -64,6 +67,43 @@ namespace Orders.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            var categoryViewModel = new CategoryViewModel
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+
+            return View(categoryViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(CategoryViewModel category)
+        {
+            if (ModelState.IsValid)
+            {
+                var categoryToUpdate = await _context.Categories.FindAsync(category.Id);
+
+                categoryToUpdate.Name = category.Name;
+
+                _context.Update(categoryToUpdate);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(category);
         }
     }
 }

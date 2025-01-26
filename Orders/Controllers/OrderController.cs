@@ -28,13 +28,28 @@ namespace Orders.Controllers
                 return NotFound();
             }
 
-            var orders = await _context.Orders
-                .Where(o => o.CustomerId == user.Id)
-                .Include(o => o.Product)
-                .Include(o => o.Customer)
-                .ToListAsync();
+            if (User.IsInRole("Admin"))
+            {
+                var orders = await _context.Orders
+                    .Include(o => o.Customer)
+                    .Include(o => o.Product)
+                    .OrderBy(o => o.IsCompleted)
+                    .ThenBy(o => o.Date)
+                    .ToListAsync();
 
-            return View(orders);
+                return View("AdminIndex", orders);
+            }
+            else
+            {
+                var orders = await _context.Orders
+                    .Where(o => o.CustomerId == user.Id)
+                    .Include(o => o.Product)
+                    .OrderBy(o => o.IsCompleted)
+                    .ThenBy(o => o.Date)
+                    .ToListAsync();
+
+                return View("ClientIndex", orders);
+            }
         }
 
         public async Task<IActionResult> Create()
@@ -107,6 +122,12 @@ namespace Orders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MarkAsCompleted(int orderId)
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
             var order = await _context.Orders
                 .FirstOrDefaultAsync(o => o.Id == orderId);
 
@@ -115,10 +136,13 @@ namespace Orders.Controllers
                 return NotFound();
             }
 
-            order.IsCompleted = true;
+            if(User.IsInRole("Admin"))
+            {
+                order.IsCompleted = true;
 
-            _context.Update(order);
-            await _context.SaveChangesAsync();
+                _context.Update(order);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToAction(nameof(Index));
         }

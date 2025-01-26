@@ -27,9 +27,10 @@
                 <td>@product.Category.Name</td>
                 <td>@product.Price</td>
                 <td>
-                    <form asp-action="Delete" method="post" style="display:inline;">
-                        <input type="hidden" name="id" value="@product.Id" />
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    <a href="@Url.Action("Edit", "Product", new { id = product.Id })" class="btn btn-primary">Edit</a>
+                    <form action="@Url.Action("Delete", "Product", new { id = product.Id })" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>

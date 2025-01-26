@@ -37,15 +37,6 @@
                     }
                 </td>
                 <td>@order.TotalValue.ToString("C")</td>
-                <td>
-                    @if (!order.IsCompleted)
-                    {
-                        <form asp-action="MarkAsCompleted" method="post" style="display:inline;">
-                            <input type="hidden" name="orderId" value="@order.Id" />
-                            <button type="submit" class="btn btn-success btn-sm">Mark as Completed</button>
-                        </form>
-                    }
-                </td>
             </tr>
         }
     </tbody>

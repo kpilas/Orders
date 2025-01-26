@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Orders.Models.Domains.Order>
+
+<h2>All Orders</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer Email</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Value</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.Customer.Email</td>
+                <td>@order.Product.Name</td>
+                <td>@order.Quantity</td>
+                <td>@order.TotalValue</td>
+                <td>@order.Date</td>
+                <td>
+                    @if (order.IsCompleted)
+                    {
+                        <span class="badge bg-success">Completed</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning">Pending</span>
+                    }
+                </td>
+                <td>
+                    @if (!order.IsCompleted)
+                    {
+                        <form asp-action="MarkAsCompleted" method="post" style="display:inline;">
+                            <input type="hidden" name="orderId" value="@order.Id" />
+                            <button type="submit" class="btn btn-success btn-sm">Mark as Completed</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
