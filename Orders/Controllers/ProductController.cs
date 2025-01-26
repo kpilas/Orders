@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Orders.Models.Domains;
 using Orders.Models.ViewModels;
 using Orders.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Orders.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _context;
